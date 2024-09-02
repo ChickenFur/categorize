@@ -32,16 +32,54 @@ export const POST: RequestHandler = async ({ request }) => {
             detailSummary: '',
             buyPrice: null,
             sellPrice: null,
-            type: "shirt" || "pants" || "shorts" || "dress" || "other"
+            type: 'shirt',
+          'pants',
+          'shorts',
+          'dress',
+          'other',
+          'jacket',
+          'coat',
+          'shoes',
+          'accessories',
+          'sweat pants',
+          'sweat shirt',
+          'sweat shorts',
+          'sweat dress',
+          'athletic shorts',
+          'athletic shirt',
+          'athletic pants',
+          'athletic dress',
+          'athletic shoes',
+          'boots',
+          'sandals',
+          'flip flops',
+          'hat',
+          'scarf',
+          'gloves',
+          'belt',
+          'socks',
+          'tights',
+          'leggings',
+          't-shirt',
+          'long sleeve shirt',
+          'short sleeve shirt',
+          'tank top',
+          'blouse',
+          'sweater',
+          'cardigan',
+          'vest',
+          'jacket',
+          'dress',
+          'skirt'
           }
-          if detailSummary includes the type of clothing like shorts, shirt, pants, or dress, you put that in the type. If the clothing has stains or tears that are visible in the image, you should rate the condition as bad. If the clothing has no visible stains or tears, you should rate the condition as good. If the clothing has some visible wear, but no stains or tears, you should rate the condition as fair. If the clothing is in like-new condition, you should rate the condition as excellent.`
+          if detailSummary includes the type of clothing like shorts, shirt, pants, or dress, you put that in the type. If the clothing has stains in the image, you should rate the condition as bad. If the clothing has no visible stains or tears, you should rate the condition as good. If the clothing has some visible wear, but no stains or tears, you should rate the condition as fair. If the clothing is in like-new condition, you should rate the condition as excellent.`
 			},
 			{
 				role: 'user',
 				content: [
 					{
 						type: 'text',
-						text: `What brand and size are in this image of clothes? What type of clothing is it, shorts, pants, shirt, dress? What is the condition of the clothes? Rate as bad, good, fair, or excellent, based on stains, tears, and wear. An estimated buy price for the retailer and a sale price for other customers.`
+						text: `What brand and size are in this image of clothes? What type of clothing is it, shorts, pants, shirt, dress or others? What is the condition of the clothes? Rate as bad, good, fair, or excellent, based on stains, tears, and wear. An estimated buy price for the retailer and a sale price for other customers.`
 					},
 					{
 						type: 'image_url',

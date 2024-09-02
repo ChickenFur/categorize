@@ -69,6 +69,7 @@
           categorized.set(parsedResults);
           
           goto('/results');
+          isLoading = false;
         }catch(e){
           console.log(e)
         }

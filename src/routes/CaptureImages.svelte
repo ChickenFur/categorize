@@ -3,6 +3,7 @@
   import {categorized, categorizationSchema} from '$lib/categorized'
   import {base64Images} from '$lib/base64Images'
 	import { fade } from "svelte/transition";
+  import { resizeImage } from '$lib/ImageResize';
   let files: FileList | null = null;
 
   let uploadedImage1: string | null = null;
@@ -28,14 +29,16 @@
       console.log(files);
       let reader = new FileReader();
       reader.readAsDataURL(input.files[0]);
-      reader.onload = function () {
+      reader.onload = async function () {
+        const resizedImage = await resizeImage(reader.result as string, 800, 800)
         if(uploadedImage1){
-          uploadedImage2 = reader.result as string;
+          uploadedImage2 = resizedImage 
           base64Images.update((images) => {
             return [...images, uploadedImage2!]
           })
         }else{
-          uploadedImage1 = reader.result as string;
+          const resizedImage = await resizeImage(reader.result as string, 800, 800)
+          uploadedImage1 = resizedImage
           base64Images.update((images) => {
             return [...images, uploadedImage1!]
           })

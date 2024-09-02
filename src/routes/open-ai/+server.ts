@@ -34,8 +34,7 @@ export const POST: RequestHandler = async ({ request }) => {
             sellPrice: null,
             type: "shirt" || "pants" || "shorts" || "dress" || "other"
           }
-            
-          if detailSummary includes the type of clothing like shorts, shirt, pants, or dress, you put that in the type.`
+          if detailSummary includes the type of clothing like shorts, shirt, pants, or dress, you put that in the type. If the clothing has stains or tears that are visible in the image, you should rate the condition as bad. If the clothing has no visible stains or tears, you should rate the condition as good. If the clothing has some visible wear, but no stains or tears, you should rate the condition as fair. If the clothing is in like-new condition, you should rate the condition as excellent.`
 			},
 			{
 				role: 'user',

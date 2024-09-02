@@ -89,7 +89,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		system_fingerprint: 'fp_9722793223'
 	};
 
-	return new Response(JSON.stringify(savedResponse));
+	//return new Response(JSON.stringify(savedResponse));
 	try {
 		const chatCompletion = await client.chat.completions.create(payload);
 		console.log('chatCompletion', chatCompletion);

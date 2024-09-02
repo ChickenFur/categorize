@@ -2,7 +2,7 @@
   import {goto} from "$app/navigation"
   import {categorized, categorizationSchema} from '$lib/categorized'
   import {base64Images} from '$lib/base64Images'
-  import { z } from 'zod';
+	import { fade } from "svelte/transition";
   let files: FileList | null = null;
 
   let uploadedImage1: string | null = null;
@@ -64,7 +64,7 @@
           const parsedResults = categorizationSchema.parse(JSON.parse(result.choices[0].message.content))
           console.log('API call successful:', parsedResults);
           categorized.set(parsedResults);
-          isLoading = false; // Set loading state to false
+          
           goto('/results');
         }catch(e){
           console.log(e)
@@ -72,12 +72,13 @@
       } else {
         console.error('API call failed:', response.statusText);
       }
-      isLoading = false; // Set loading state to false
     } catch (error) {
       console.error('Error making API call:', error);
+      
+    }finally{
       isLoading = false; // Set loading state to false
-    }
   }
+}
 </script>
 
 {#if isLoading}
@@ -101,16 +102,16 @@
 {#if !uploadedImage1}
   <div>
     <h1>Step 1: Image of the tag</h1>
-    <label for="avatar">Upload a picture:</label>
-    <input accept="image/png, image/jpeg, image/heic" id="avatar" name="avatar" type="file" on:change={onFileSelected} />
+    <label for="image1" class="submit-button">Upload a picture</label>
+    <input style="display: none;" accept="image/png, image/jpeg, image/heic" id="image1" name="image1" type="file" on:change={onFileSelected} />
   </div>
 {/if}
 
 {#if !uploadedImage2}
   <div>
     <h1>Step 2 Image of the clothes</h1>
-    <label for="avatar">Upload a picture:</label>
-    <input accept="image/png, image/jpeg, image/heic" id="avatar" name="avatar" type="file" on:change={onFileSelected} />
+    <label for="image2" class="submit-button">Upload a picture:</label>
+    <input style="display: none;" accept="image/png, image/jpeg, image/heic" id="image2" name="image2" type="file" on:change={onFileSelected} />
   </div>
 {/if}
   
@@ -161,7 +162,7 @@
     margin: 0.5rem; /* Adjust margin for spacing */
   }
 
-  .submit-button {
+  .submit-button, input[type="file"] {
     background-color: #3498db; /* Blue background */
     color: white; /* White text */
     padding: 15px 30px; /* Bigger padding */
@@ -173,11 +174,11 @@
     margin-top: 1rem; /* Add some space above the button */
   }
 
-  .submit-button:hover {
+  .submit-button:hover, input[type="file"]{
     background-color: #2980b9; /* Darker blue on hover */
   }
 
-  .submit-button:active {
+  .submit-button:active, input[type="file"] {
     background-color: #1c598a; /* Even darker blue on click */
   }
  

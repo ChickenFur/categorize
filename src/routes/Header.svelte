@@ -6,7 +6,7 @@
 
 <header>
 	<h1>
-		Categorizer
+		Categorizer {#if $page.url.pathname === "/results"} Results {/if}
 	</h1>
 </header>
 

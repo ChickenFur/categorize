@@ -85,44 +85,45 @@
    <div class="loading-spinner" in:fade></div>
 {/if}
 
+{#if !isLoading}
 <div class="image-upload-wrapper">
-<h1>Upload images of the tag and the clothes</h1>
-<div class="image-container">
-  {#if uploadedImage1}
-    <img src={uploadedImage1} alt="Uploaded image to be sent" />
-    
+  <h1>Upload images of the tag and the clothes</h1>
+  <div class="image-container">
+    {#if uploadedImage1}
+      <img src={uploadedImage1} alt="Uploaded image to be sent" />
+      
+    {/if}
+
+    {#if uploadedImage2}
+      <img src={uploadedImage2} alt="Uploaded image to be sent" />
+      
+    {/if}
+  </div>
+
+  {#if !uploadedImage1}
+    <div>
+      <h1>Step 1: Image of the tag</h1>
+      <label for="image1" class="submit-button">Upload a picture</label>
+      <input style="display: none;" accept="image/png, image/jpeg, image/heic" id="image1" name="image1" type="file" on:change={onFileSelected} />
+    </div>
   {/if}
 
-  {#if uploadedImage2}
-    <img src={uploadedImage2} alt="Uploaded image to be sent" />
+  {#if !uploadedImage2}
+    <div>
+      <h1>Step 2 Image of the clothes</h1>
+      <label for="image2" class="submit-button">Upload a picture:</label>
+      <input style="display: none;" accept="image/png, image/jpeg, image/heic" id="image2" name="image2" type="file" on:change={onFileSelected} />
+    </div>
+  {/if}
     
+  <!-- <label for="many">Upload multiple files of any type:</label>
+  <input id="many" multiple type="file" on:change={onFileSelected} /> -->
+  <br/>
+  {#if uploadedImage1 && uploadedImage2}
+    <button class="submit-button" on:click={makeAPICall}>Submit to AI</button>
   {/if}
 </div>
-
-{#if !uploadedImage1}
-  <div>
-    <h1>Step 1: Image of the tag</h1>
-    <label for="image1" class="submit-button">Upload a picture</label>
-    <input style="display: none;" accept="image/png, image/jpeg, image/heic" id="image1" name="image1" type="file" on:change={onFileSelected} />
-  </div>
 {/if}
-
-{#if !uploadedImage2}
-  <div>
-    <h1>Step 2 Image of the clothes</h1>
-    <label for="image2" class="submit-button">Upload a picture:</label>
-    <input style="display: none;" accept="image/png, image/jpeg, image/heic" id="image2" name="image2" type="file" on:change={onFileSelected} />
-  </div>
-{/if}
-  
-<!-- <label for="many">Upload multiple files of any type:</label>
-<input id="many" multiple type="file" on:change={onFileSelected} /> -->
-<br/>
-{#if uploadedImage1 && uploadedImage2}
-  <button class="submit-button" on:click={makeAPICall}>Submit to AI</button>
-{/if}
-
-</div>
 
 <style>
  .loading-spinner {
